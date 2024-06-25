@@ -1,72 +1,81 @@
-.welcome-page{
-   
+.welcome-page {
+    display: flex;
+    height: 100vh;
 }
 
-.Signuplogin{
-    
+.left-side {
+    background-color:#a0d2eb;
+    flex: 1.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
  
+      
+     
+    
 }
-.Loginbutton{
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 55%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    width: 100px;
-    background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
-    border-radius: .5rem;
-    box-sizing: border-box;
-    color: #FFFFFF;
+.left-side h1{
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #000, #000);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    animation: animate 5s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    font-weight: bold;
+}
+@keyframes animate {
+    0% {
+      background-position: -500%;
+    }
+    100% {
+      background-position: 500%;
+    }
+  }
+.right-side {
+    flex: 1;
     display: flex;
-    font-size: 16px;
+    flex-direction: column;
     justify-content: center;
-    padding: 1rem 1.75rem;
-    text-decoration: none;
-    border: 0;
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+    align-items: center;
+    font-family: Georgia, serif;
+    gap: 10px;
+    background-color: #FAF9F6
+    ;
+
 }
-.Signupbutton{
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 45%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background-color: red;
-    border: 3px solid green;
-    width: 100px;
-    background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
-    border-radius: .5rem;
-    box-sizing: border-box;
-    color: #FFFFFF;
-    display: flex;
-    font-size: 16px;
-    justify-content: center;
-    padding: 1rem 1.75rem;
-    text-decoration: none;
-    border: 0;
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+
+.Signupbutton, .Loginbutton {
+    width: 300px !important
 }
-.Signuptext{
-    text-decoration: none;
-    color: #ffffff;
-}
-.Logintext{
+
+.Signuptext, .Logintext {
     text-decoration: none;
     color: #ffffff;
 }
 
-.Careergenieaitext{
-text-align: center;
-margin: 0;
-top: 30%;
-left: 40%;
-margin-top: 13%;
+@media screen and (max-width: 992px) {
+    .welcome-page {
+        flex-direction: column;
+    }
+    .left-side {
+        width: 100%;
+        height: 50%;
+        flex: 1;
+        font-size: 15px;
+        text-align: center;
+    }
+    .right-side {
+        width: 100%;
+        height: 50%;
+        padding-right: 0;
+        align-items: center;
+    }
+    .Signupbutton, .Loginbutton {
+        width: 200px;
+    }
 }
