@@ -11,6 +11,7 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "formik": "^2.4.6",
+    "http-proxy-middleware": "^3.0.0",
     "mdb-react-ui-kit": "^8.0.0",
     "mongodb": "^6.7.0",
     "mongoose": "^8.4.3",
@@ -24,6 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-flask-api": "cd api && venv\\Scripts\\flask run",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -47,6 +49,8 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
+    "react-app-rewired": "^2.2.1",
     "react-router-dom": "^6.23.1"
   }
 }

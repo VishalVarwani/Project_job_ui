@@ -1,8 +1,12 @@
-import time
-import requests
-from bs4 import BeautifulSoup
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from flask import Flask, jsonify, request
 from pymongo import MongoClient
+from bs4 import BeautifulSoup
+import requests
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import os
+
+app = Flask(__name__)
 
 def fetch_job_data(url, retries=3):
     while retries > 0:
@@ -31,16 +35,21 @@ def parse_job_listings(html):
     return jobs
 
 def save_to_mongodb(jobs, db_name='job_listings', collection_name='jobs'):
-    client = MongoClient('mongodb://localhost:27017')
+    client = MongoClient(os.getenv('MONGO_URI', 'mongodb://localhost:27017/'))
     db = client[db_name]
     collection = db[collection_name]
     if jobs:
         collection.insert_many(jobs)
 
-def main():
+@app.route('/', methods=['POST'])
+def fetch_jobs():
+    data = request.get_json()
+    job_title = data.get('job_title', 'developer')
+    location = data.get('location', 'india')
+
     all_jobs = []
     urls = [
-        f'https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=developer&location=india&trk=public_jobs_jobs-search-bar_search-submit&start={start}'
+        f'https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={job_title}&location={location}&trk=public_jobs_jobs-search-bar_search-submit&start={start}'
         for start in range(0, 1000, 25)
     ]
 
@@ -59,6 +68,19 @@ def main():
                 print(f'Error processing URL: {url} - {e}')
 
     save_to_mongodb(all_jobs)
+    return jsonify({'message': 'Job fetching initiated'})
 
-if __name__ == "__main__":
-    main()
+@app.route('/', methods=['GET'])
+def get_jobs():
+    client = MongoClient(os.getenv('MONGO_URI', 'mongodb://localhost:27017/'))
+    db = client['job_listings']
+    collection = db['jobs']
+    jobs = list(collection.find({}, {'_id': 0}))  # Exclude MongoDB's internal _id field
+    return jsonify(jobs)
+
+@app.route('/', methods=['GET'])
+def hello_world():
+    return jsonify({'message': 'Hello, World!'})
+
+if __name__ == '__main__':
+    app.run(debug=True)
