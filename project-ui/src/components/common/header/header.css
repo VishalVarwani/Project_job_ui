@@ -1,0 +1,140 @@
+:root {
+    --header-height: 10vh; /* Define header height for easy adjustments */
+    --first-color: rgb(73, 170, 255); /* Example color for buttons */
+    --second-font: 'Arial', sans-serif; /* Example font family */
+    --h2-font-size: 1.5rem; /* Font size for the logo */
+    --title-color: #333; /* Example title color */
+    --font-semi-bold: 600; /* Font weight for semi-bold text */
+    --z-fixed: 10; /* Z-index for fixed elements */
+  }
+  
+  .Parentclass {
+    padding-top: var(--header-height); /* Space for fixed header */
+  }
+  
+  .headerhome {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #cbcbcb;
+    z-index: var(--z-fixed);
+    height: var(--header-height);
+    display: flex; /* Use flexbox to center items vertically */
+    align-items: center; /* Center elements vertically */
+    justify-content: center; /* Center elements horizontally */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    padding: 0 1rem; /* Add padding to the left and right */
+  }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; /* Restrict max width for a more compact layout */
+    margin: 0 auto; /* Center nav container horizontally */
+  }
+  
+  .nav__logo {
+    color: var(--first-color);
+    transition: color 0.4s;
+    font-size: var(--h2-font-size);
+    font-family: var(--second-font);
+    text-decoration: none; /* Remove underline from links */
+    font-weight: bold; /* Make logo text bold */
+  }
+  
+  .nav__toggle,
+  .nav__close {
+    font-size: 1.5rem;
+    color: var(--title-color);
+    cursor: pointer;
+    display: flex; /* Ensure flex display for icons */
+    align-items: center; /* Center icons vertically */
+    justify-content: center; /* Center icons horizontally */
+    padding: 0.5rem; /* Add some padding for better touch target */
+  }
+  
+  .nav__cta {
+    background-color: var(--first-color);
+    color: white; /* Make text color white for better contrast */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none; /* Remove underline from links */
+    font-weight: bold; /* Make button text bold */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  }
+  
+  .nav__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the list items horizontally */
+    row-gap: 2.5rem;
+    list-style: none; /* Remove list style (bullets) */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+  }
+  
+  .nav__link {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+    transition: color 0.4s;
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  .nav__link:hover {
+    color: var(--first-color); /* Change color on hover */
+  }
+  
+  .nav__close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+  }
+  
+  .show-menu {
+    right: 0;
+  }
+  
+  @media screen and (max-width: 1150px) {
+    .nav__menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      background-color: rgba(141, 197, 233, 0.95); /* Add transparency */
+      backdrop-filter: blur(10px); /* Apply backdrop blur */
+      height: 100%;
+      padding: 9rem 3rem;
+      transition: right 0.4s;
+      z-index: var(--z-fixed); /* Ensure the menu is above other elements */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Center items vertically in the mobile menu */
+    }
+  
+    .show-menu {
+      right: 0; /* Show the menu by resetting right to 0 */
+    }
+  }
+  
+  @media screen and (min-width: 1150px) {
+    .nav {
+      height: calc(var(--header-height) + 1rem);
+    }
+  
+    .nav__toggle,
+    .nav__close {
+      display: none; /* Hide toggle and close icons on larger screens */
+    }
+  
+    .nav__list {
+      flex-direction: row; /* Display items in a row for larger screens */
+      column-gap: 2.5rem; /* Gap between each navigation item */
+    }
+  }
+  
+  

@@ -30,14 +30,18 @@ def parse_job_listings(html):
         job_title = job.find('h3', class_='base-search-card__title').text.strip()
         company = job.find('h4', class_='base-search-card__subtitle').text.strip()
         location = job.find('span', class_='job-search-card__location').text.strip()
+        # level = job.find('ul', class_='description__job-criteria-list').text.strip()
+
         link = job.find('a', class_='base-card__full-link')['href']
-        jobs.append({'Title': job_title, 'Company': company, 'Location': location, 'Link': link})
+        jobs.append({'Title': job_title, 'Company': company, 'Location': location, 'Link': link,})
+
     return jobs
 
 def save_to_mongodb(jobs, db_name='job_listings', collection_name='jobs'):
     client = MongoClient(os.getenv('MONGO_URI', 'mongodb://localhost:27017/'))
     db = client[db_name]
     collection = db[collection_name]
+    collection.delete_many({})
     if jobs:
         collection.insert_many(jobs)
 

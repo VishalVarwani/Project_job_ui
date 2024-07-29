@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Headerjs from '../common/header/header';
 
 export default function Home() {
   const [jobTitle, setJobTitle] = useState('');
@@ -43,6 +44,7 @@ export default function Home() {
 
   return (
     <div>
+      <Headerjs/>
       <h1>Job Listings</h1>
       <form onSubmit={handleSubmit}>
         <div>
